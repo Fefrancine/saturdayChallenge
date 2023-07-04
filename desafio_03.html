@@ -8,10 +8,10 @@
 
     Caso o usuário não informe o tipo de veículo que deseja alugar, o programa deve perguntar novamente qual o tipo de veículo que o usuário deseja alugar. Caso informe incorretamente por três vezes consecutivas, o programa deve ser encerrado.
 
-    Considerando que escolheu o tipo 1, pergunte qual categoria que pretende, sendo:
+    2222222 Considerando que escolheu o tipo 1, pergunte qual categoria que pretende, sendo:
     1- Econômico: R$ 100,00 por dia
     2- Intermediário: R$ 150,00 por dia
-    3- Luxo: R$ 200,00 por dia
+    3- Luxo: R$ 200,00 por dia 22222
 
     Contudo, se informou o tipo 2, pergunte qual categoria que pretende, sendo:
     1- Econômico: R$ 50,00 por dia
@@ -29,8 +29,7 @@
     Após informar a quantidade de dias, o programa deverá perguntar se ele deseja contratar seguro. Caso deseja contratar seguro, o valor diário do seguro custa 10% do preço do veículo. Valide o dado informado pelo usuário e, caso ele não digite um valor válido, o programa deverá ser encerrado após três tentativas incorretas.
 
     Ao final, o programa deverá informar o valor total do aluguel, considerando o valor do veículo, o valor do seguro (caso contratado) e a quantidade de dias que o veículo foi alugado. Peça também para o usuário informar qual foi a Km percorrida. Valide este dado informado pelo usuário e, não digitando um valor correto por três vezes consecutivas, o programa deverá ser encerrado.
-
-    Caso a Km informada ultrapasse a média de 50 km por dia, o programa deverá informar que o usuário deverá pagar um valor adicional de R$ 1,00 por Km excedente. Caso contrário, o programa deverá informar que o usuário não precisará pagar nenhum valor adicional.
+O programa será encerrado por excesso de tentativas! usuário não precisará pagar nenhum valor adicional.
 
     Pergunte também para o usuário, na devolução do veículo, se houveram avarias no veículo. Caso houveram avarias, o programa deverá perguntar ao usuário qual a gravidade das avarias, sendo:
     1- Leve: R$ 100,00
@@ -49,7 +48,79 @@
 
     Caso tenha informado incorretamente por três vezes consecutivas, o programa deve ser encerrado.
     Também, caso tenha informado a opção 2, o programa deverá perguntar se deseja parcelar o valor do aluguel. O prazo máximo de parcelamento é de 3x sem juros ou, qualquer outro prazo maior, com limite de 12, terá um outro acréscimo na parcela, correspondente com a taxa de juros de 2% ao mês.
+so o usuário não informe corretamente a categoria que deseja alugar, o programa deve perguntar novamente qual a categoria que o usuário deseja alugar. Caso informe incorretamente por três vezes consecutivas, o programa deve ser encerrado.
 
     Ao final, o programa deverá informar o valor total a ser pago pelo aluguel do veículo, considerando o valor do veículo, o valor do seguro (caso contratado), a quantidade de dias que o veículo foi alugado, a quantidade de Km percorrida (e o adicional pago por Km percorrido, se for o caso), o valor das avarias (caso houverem) e a forma de pagamento escolhida pelo usuário.
     */
+
+    let veículo = prompt(`Informe qual veículo você deseja alugar(Carro, moto ou caminhão)`).toLowerCase();
+
+    if (veículo != "carro" && veículo != "moto" && veículo != "caminhão") {
+        alert(`Informação incorreta, tente novamente`)
+        veículo = prompt(`Informe novamente qual veículo você deseja alugar(Carro, moto ou caminhão)`);
+
+        if (veículo != "carro" && veículo != "moto" && veículo != "caminhão") {
+            alert(`Informação incorreta, tente pela última vez`)
+            veículo = prompt(`Informe novamente qual veículo você deseja alugar(Carro, moto ou caminhão)`);
+            if (veículo != "carro" && veículo != "moto" && veículo != "caminhão") {
+                alert(`Suas chances acabaram, o programa encerrado`);
+                throw new Error(`O programa foi encerrado`);
+            }
+        }
+    }
+
+    let categoria = "";
+    let mensagemCategoria = "";
+    if (veículo == "carro") {
+        mensagemCategoria = `Informe qual categoria você deseja! Para carro serão as seguintes categorias: \n 
+        1- Econômico: R$ 100,00 por dia \n
+        2- Intermediário: R$ 150,00 por dia \n
+        3- Luxo: R$ 200,00 por dia.`;
+    }
+    else if (veículo == "moto") {
+        mensagemCategoria = `Para moto: \n
+        1- Econômico: R$ 50,00 por dia \n
+        2- Intermediário: R$ 100,00 por dia \n
+        3- Luxo: R$ 150,00 por dia.`;
+    }
+    else if (veículo == "caminhão") {
+        mensagemCategoria = `Para caminhão: \n
+        1 - Pequeno: R$ 200, 00 por dia \n
+        2 - Médio: R$ 250, 00 por dia \n
+        3 - Grande: R$ 300, 00 por dia`;
+    }
+    let codigoCategoria = Number(prompt(mensagemCategoria));
+    if (isNaN(codigoCategoria) || codigoCategoria < 1 || codigoCategoria > 3) {
+        alert(`Código de Categoria Inválido!`);
+        codigoCategoria = Number(prompt(mensagemCategoria));
+        if (isNaN(codigoCategoria) || codigoCategoria < 1 || codigoCategoria > 3) {
+            alert(`Código de Categoria Inválido!`);
+            codigoCategoria = Number(prompt(mensagemCategoria));
+        }
+        if (isNaN(codigoCategoria) || codigoCategoria < 1 || codigoCategoria > 3) {
+            alert(`O programa será encerrado por excesso de tentativas!`);
+            throw new Error(`O programa foi encerrado por excesso de tentativas!`);
+        }
+    }
+    let valorDiariaAluguel = 0;
+    if (veículo == "carro") {
+        (codigoCategoria == 1) ? valorDiariaAluguel == 100
+        : (codigoCategoria == 2) ? valorDiariaAluguel == 150
+        : valorDiariaAluguel == 200;
+    }
+    else if (veículo == "moto") {
+        (codigoCategoria == 1) ? valorDiariaAluguel == 50
+        : (codigoCategoria == 2) ? valorDiariaAluguel == 100
+        : valorDiariaAluguel == 150;
+    }
+    else if (veículo == "caminhão") {
+        (codigoCategoria == 1) ? valorDiariaAluguel == 200
+        : (codigoCategoria == 2) ? valorDiariaAluguel == 250
+        : valorDiariaAluguel == 300;
+    }
+    
+    
+
+
+
 </script>
